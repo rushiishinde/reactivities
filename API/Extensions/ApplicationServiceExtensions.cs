@@ -22,8 +22,7 @@ namespace API.Extensions
             //Configuring Services
             services.AddDbContext<DataContext>(options =>
             {
-                //specifying which database server to use. Here, we are using sqlite
-                options.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             });
 
             //Adding CORS service
@@ -35,10 +34,8 @@ namespace API.Extensions
                 });
             });
 
-            //Adding MediatR service
             services.AddMediatR(typeof(List.Handler));
 
-            //Adding Automapper as a service
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             services.AddFluentValidationAutoValidation();
